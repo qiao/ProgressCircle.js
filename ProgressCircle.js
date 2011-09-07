@@ -74,6 +74,9 @@
             return this;
         },
 
+        /**
+         * Stop the animation.
+         */
         stop: function() {
             clearTimeout(this.timer);  
         },
