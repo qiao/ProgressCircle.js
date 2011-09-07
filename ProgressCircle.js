@@ -15,8 +15,8 @@
         this.minRadius = params.minRadius || 75;
         this.arcWidth = params.arcWidth || 20;
         this.gapWidth = params.gapWidth || 5;
-        this.centerX = params.centerX;
-        this.centerY = params.centerY;
+        this.centerX = params.centerX || this.canvas.width / 2;
+        this.centerY = params.centerY || this.canvas.height / 2;
         this.infoLineAngleInterval = params.infoLineAngleInterval || Math.PI / 8;
         this.infoLineBaseAngle = params.infoLineBaseAngle || Math.PI / 6;
 
@@ -139,8 +139,10 @@
         this.infoListener = params.infoListener;
         this.infoLineAngle = params.infoLineAngle;
 
-
         this.outerRadius = this.innerRadius + this.arcWidth;
+
+
+        if (!this.infoListener) return;
 
         // calculate the info-line segment points
         var angle = this.infoLineAngle,
@@ -164,9 +166,9 @@
         var infoText = document.createElement('div'),
             style = infoText.style;
 
-        // FIXME: should consider the offset of the parent
         style.color = this.fillColor;
         style.position = 'absolute';
+        style.className = 'PC_Info'
         style.left = this.infoLineEndX + this.canvas.offsetLeft + 'px';
         style.top = this.infoLineEndY + this.canvas.offsetTop -8 + 'px';
         style.paddingLeft = '20px';
@@ -241,57 +243,3 @@
     window.CircleManager = CircleManager;
 
 })(window, document);
-
-
-window.onload = function() {
-    document.body.style.backgroundColor = '#ddd';
-
-    var container = document.getElementById('container');
-    container.style.marginTop = '0px';
-    var canvas = document.createElement('canvas');
-    canvas.style.backgroundColor = '#333'; 
-    //canvas.style.marginTop = "200px";
-    //canvas.style.marginLeft = "20px";
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    container.appendChild(canvas);
-
-    var manager = new CircleManager({
-        canvas: canvas,
-        centerX: 200,
-        centerY: 200,
-        infoLineBaseAngle: Math.PI / 4,
-        infoLineAngleInterval: Math.PI / 20,
-    });
-
-    var p1 = p2 = p3 = 0;
-
-    manager.addEntry({
-        fillColor: 'rgba(255, 255, 0, 0.5)',
-        progressListener: function() {return p1;},
-        infoListener: function() {
-            return Math.round(p1 * 100) + '% of 256MB' + 
-                ' foobar.mkv';
-        },
-    }).addEntry({
-        fillColor: 'rgba(102, 255, 0, 0.5)',
-        progressListener: function() {return p2;},
-        infoListener: function() {
-            return Math.round(p2 * 100) + '% of 13MB' + 
-                ' production.sqlite3';
-        },
-    }).addEntry({
-        fillColor: 'rgba(0, 255, 255, 0.5)',
-        progressListener: function() {return p3;},
-        infoListener: function() {
-            return Math.round(p3 * 100) + '% of 46MB' + 
-                ' memoria.pdf';
-        },
-    }).start(33);
-
-    setInterval(function() {
-        p1 = p1 < 1 ? p1 + 0.001 : 0;
-        p2 = p2 < 1 ? p2 + 0.002 : 0;
-        p3 = p3 < 1 ? p3 + 0.0025 : 0;
-    }, 20);
-};
