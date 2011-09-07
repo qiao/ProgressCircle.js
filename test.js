@@ -21,13 +21,14 @@ window.onload = function() {
 
     var p1 = p2 = p3 = 0;
 
+    /*
     circle.addEntry({
         fillColor: '#ff0',
         progressListener: function() {return p3;},
     }).start();
+    */
 
 
-    /*
     var circle = new ProgressCircle({
         canvas: canvas,
         centerX: 200,
@@ -59,7 +60,6 @@ window.onload = function() {
                 ' memoria.pdf';
         },
     }).start(33);
-    */
 
     setInterval(function() {
         p1 = p1 < 1 ? p1 + 0.001 : 0;

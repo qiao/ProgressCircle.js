@@ -1,10 +1,11 @@
 (function (window, document, undefined) {
     /**
-     * @class The manager for manipulating the progress circles.
+     * @constructor Progress Circle class, which is the only class exposed
+     *              to the global namespace.
      * @param params.canvas Canvas on which the circles will be drawn.
      * @param params.minRadius Inner radius of the innermost circle, in px.
-     * @param params.arcWidth Width of each arc(circle).
-     * @param params.gapWidth Distance between each arc.
+     * @param params.arcWidth Width of each circle(to be more accurate, ring).
+     * @param params.gapWidth Space between each circle.
      * @param params.centerX X coordinate of the center of circles.
      * @param params.centerY Y coordinate of the center of circles.
      * @param params.infoLineBaseAngle Base angle of the info line.
@@ -32,7 +33,7 @@
         constructor: ProgressCircle,
 
         /**
-         * Adds an progress monitor entry.
+         * @method Adds an progress monitor entry.
          * @param params.fillColor Color to fill in the circle.
          * @param params.outlineColor Color to outline the circle.
          * @param params.progressListener Callback function to fetch the progress.
@@ -61,7 +62,7 @@
         },
 
         /**
-         * Starts the monitor and updates with the given interval.
+         * @method Starts the monitor and updates with the given interval.
          * @param interval Interval between updates, in millisecond.
          * @returns this 
          */
@@ -75,31 +76,29 @@
         },
 
         /**
-         * Stop the animation.
+         * @method Stop the animation.
          */
         stop: function () {
             clearTimeout(this.timer);  
         },
 
         /**
-         * Call update on each circle and redraw them.
          * @private
+         * @method Call update on each circle and redraw them.
          * @returns this
          */ 
         _update: function () {
             this._clear();
             this.circles.forEach(function (circle, idx, array) {
                 circle.update();
-                circle.draw();
-                circle.drawInfo();
             });    
 
             return this;
         },
 
         /**
-         * Clear the canvas.
          * @private
+         * @method Clear the canvas.
          * @returns this
          */
         _clear: function () {
@@ -111,8 +110,8 @@
     };
 
     /**
-     * @class Individual progress circle.
      * @private
+     * @class Individual progress circle. 
      * @param params.canvas Canvas on which the circle will be drawn.
      * @param params.context Context of the canvas.
      * @param params.innerRadius Inner radius of the circle, in px.
@@ -141,17 +140,19 @@
 
         this.outerRadius = this.innerRadius + this.arcWidth;
 
-
+        // If the info listener is not registered, then don't calculate 
+        // the related coordinates
         if (!this.infoListener) return;
 
-        // calculate the info-line segment points
+        // calculate the info-line turning points
         var angle = this.infoLineAngle,
             arcDistance = (this.innerRadius + this.outerRadius) / 2,
 
             sinA = Math.sin(angle),
             cosA = Math.cos(angle),
 
-            MID_LINE_LENGTH = 250;
+            MID_LINE_LENGTH = 250,
+            HORIZONTAL_LENGTH = 50;
             
 
         this.infoLineStartX = this.centerX + sinA * arcDistance;
@@ -160,7 +161,8 @@
         this.infoLineMidX = this.centerX + sinA * MID_LINE_LENGTH;
         this.infoLineMidY = this.centerY - cosA * MID_LINE_LENGTH;
 
-        this.infoLineEndX = this.infoLineMidX + (sinA < 0 ? -50 : 50);
+        this.infoLineEndX = this.infoLineMidX + 
+             (sinA < 0 ? -HORIZONTAL_LENGTH : HORIZONTAL_LENGTH);
         this.infoLineEndY = this.infoLineMidY;
 
         var infoText = document.createElement('div'),
@@ -168,11 +170,12 @@
 
         style.color = this.fillColor;
         style.position = 'absolute';
-        style.className = 'PC_Info'
         style.left = this.infoLineEndX + this.canvas.offsetLeft + 'px';
-        style.top = this.infoLineEndY + this.canvas.offsetTop -8 + 'px';
+        // style.top will be calculated in the `drawInfo` method. Since
+        // user may want to change the size of the font, so the top offset 
+        // must be updated in each loop.
         style.paddingLeft = '20px';
-
+        style.className = 'ProgressCircleInfo'; // For css styling
         document.body.appendChild(infoText);
         this.infoText = infoText;
     };
@@ -182,9 +185,20 @@
 
         update: function () {
             this.progress = this.progressListener();
+            this._draw();
+
+            if (this.infoListener) {
+                this.info = this.infoListener();
+                this._drawInfo();
+            }
         },
 
-        draw: function () {
+        /**
+         * @private
+         * @method Draw the circle on the canvas.
+         * @returns this
+         */
+        _draw: function () {
             var ctx = this.context,
 
                 ANGLE_OFFSET = -Math.PI / 2,
@@ -207,23 +221,41 @@
             ctx.closePath();
             ctx.stroke();
             ctx.fill();
+
+            return this;
         },
 
-        drawInfo: function () {
-            if (!this.infoListener) {
-                return;
-            }
+        /**
+         * @private
+         * @method Draw the info lines and info text.
+         * @returns this
+         */
+        _drawInfo: function () {
 
-            var pointList = [
+            var pointList, lineHeight;
+
+            pointList = [
                 [this.infoLineStartX, this.infoLineStartY],
                 [this.infoLineMidX, this.infoLineMidY],
                 [this.infoLineEndX, this.infoLineEndY],
             ];
             this._drawSegments(pointList, false);
 
-            this.infoText.innerHTML = this.infoListener();
-        },
+            this.infoText.innerHTML = this.info;
 
+            lineHeight = this.infoText.offsetHeight;
+            this.infoText.style.top = this.infoLineEndY + 
+                this.canvas.offsetLeft - lineHeight / 2 + 'px';
+
+            return this;
+        }, 
+
+        /**
+         * @private
+         * @method Helper function to draw the segments
+         * @param pointList An array of points in the form of [x, y].
+         * @param close Whether to connect the first and last point.
+         */
         _drawSegments: function (pointList, close) {
             var ctx = this.context;
 
