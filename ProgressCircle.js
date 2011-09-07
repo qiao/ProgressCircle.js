@@ -1,4 +1,4 @@
-(function(window, document, undefined) {
+(function (window, document, undefined) {
     /**
      * @class The manager for manipulating the progress circles.
      * @param params.canvas Canvas on which the circles will be drawn.
@@ -10,13 +10,13 @@
      * @param params.infoLineBaseAngle Base angle of the info line.
      * @param params.infoLineAngleInterval Angles between the info lines.
      */
-    var CircleManager = function(params) {
+    var ProgressCircle = function (params) {
         this.canvas = params.canvas;
         this.minRadius = params.minRadius || 75;
         this.arcWidth = params.arcWidth || 20;
         this.gapWidth = params.gapWidth || 5;
-        this.centerX = params.centerX;
-        this.centerY = params.centerY;
+        this.centerX = params.centerX || this.canvas.width / 2;
+        this.centerY = params.centerY || this.canvas.height / 2;
         this.infoLineAngleInterval = params.infoLineAngleInterval || Math.PI / 8;
         this.infoLineBaseAngle = params.infoLineBaseAngle || Math.PI / 6;
 
@@ -28,8 +28,8 @@
         this.circles = [];
     };
 
-    CircleManager.prototype = {
-        constructor: CircleManager,
+    ProgressCircle.prototype = {
+        constructor: ProgressCircle,
 
         /**
          * Adds an progress monitor entry.
@@ -39,8 +39,8 @@
          * @param params.infoListener Callback function to fetch the info.
          * @returns this 
          */
-        addEntry: function(params) {
-            this.circles.push(new ProgressCircle({
+        addEntry: function (params) {
+            this.circles.push(new Circle({
                 canvas: this.canvas,
                 context: this.context,
                 centerX: this.centerX,
@@ -65,16 +65,19 @@
          * @param interval Interval between updates, in millisecond.
          * @returns this 
          */
-        start: function(interval) {
+        start: function (interval) {
             var self = this;
-            this.timer = setInterval(function() {
+            this.timer = setInterval(function () {
                 self._update(); 
             }, interval || 33)
 
             return this;
         },
 
-        stop: function() {
+        /**
+         * Stop the animation.
+         */
+        stop: function () {
             clearTimeout(this.timer);  
         },
 
@@ -83,9 +86,9 @@
          * @private
          * @returns this
          */ 
-        _update: function() {
+        _update: function () {
             this._clear();
-            this.circles.forEach(function(circle, idx, array) {
+            this.circles.forEach(function (circle, idx, array) {
                 circle.update();
                 circle.draw();
                 circle.drawInfo();
@@ -99,7 +102,7 @@
          * @private
          * @returns this
          */
-        _clear: function() {
+        _clear: function () {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
             return this;
@@ -123,7 +126,7 @@
      * @param params.infoListener Callback function to fetch the info.
      * @param params.infoLineAngle Angle of info line.
      */
-    var ProgressCircle = function(params) {
+    var Circle = function (params) {
         this.canvas = params.canvas;
         this.context = params.context;
         this.centerX = params.centerX;
@@ -136,8 +139,10 @@
         this.infoListener = params.infoListener;
         this.infoLineAngle = params.infoLineAngle;
 
-
         this.outerRadius = this.innerRadius + this.arcWidth;
+
+
+        if (!this.infoListener) return;
 
         // calculate the info-line segment points
         var angle = this.infoLineAngle,
@@ -161,9 +166,9 @@
         var infoText = document.createElement('div'),
             style = infoText.style;
 
-        // FIXME: should consider the offset of the parent
         style.color = this.fillColor;
         style.position = 'absolute';
+        style.className = 'PC_Info'
         style.left = this.infoLineEndX + this.canvas.offsetLeft + 'px';
         style.top = this.infoLineEndY + this.canvas.offsetTop -8 + 'px';
         style.paddingLeft = '20px';
@@ -172,20 +177,20 @@
         this.infoText = infoText;
     };
 
-    ProgressCircle.prototype = {
-        constructor: ProgressCircle,
+    Circle.prototype = {
+        constructor: Circle,
 
-        update: function() {
+        update: function () {
             this.progress = this.progressListener();
         },
 
-        draw: function() {
+        draw: function () {
             var ctx = this.context,
 
                 ANGLE_OFFSET = -Math.PI / 2,
 
                 startAngle = 0 + ANGLE_OFFSET,
-                endAngle= startAngle + this.progress * Math.PI * 2;
+                endAngle= startAngle + this.progress * Math.PI * 2,
 
                 x = this.centerX,
                 y = this.centerY,
@@ -204,7 +209,7 @@
             ctx.fill();
         },
 
-        drawInfo: function() {
+        drawInfo: function () {
             if (!this.infoListener) {
                 return;
             }
@@ -219,7 +224,7 @@
             this.infoText.innerHTML = this.infoListener();
         },
 
-        _drawSegments: function(pointList, close) {
+        _drawSegments: function (pointList, close) {
             var ctx = this.context;
 
             ctx.beginPath();
@@ -235,6 +240,6 @@
         },
     };
     
-    window.CircleManager = CircleManager;
+    window.ProgressCircle = ProgressCircle;
 
 })(window, document);
