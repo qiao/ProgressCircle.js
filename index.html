@@ -13,17 +13,16 @@
         <img src="./banner.png"> 
     </header>
     <canvas id="main_canvas" width="500" height="200"></canvas>
-    <div id="content">
-        
+
     <div id="wrapper">
         <h1>A progress indicator in HTML5 canvas</h1>
         <h2>Usage</h2>
 
         <p>
-            You should first create the canvas element either in HTML
-            or by Javascript, <br>
+            You should first create the canvas element in either HTML
+            or Javascript, <br>
             and specify its width and height. <br>
-            <b>Note</b>: you should not specify the size of the canvas
+            <b>Note</b>: you should NOT specify the size of the canvas
             by CSS styles.<br>
         </p>
         <p>
@@ -41,22 +40,56 @@
             progressListener: function() {
                 return THE_PROGRESS_VARIABLE_TO_LISTEN;
             },
-            infoListener: function() {
-                return THE_INFO_TEXT_TO_DISPLAY;
-            }, // (Optional)
         }).start(33); // 33 is the interval(ms) between each update
+        </pre>
 
+        <p>
+        You can add multiple progress indicators:
+        </p>
+        <pre class="prettyprint">
+        circle.addEntry({
+            fillColor: 'rgba(102, 255, 0, 0.5)',
+            progressListener: function() {return p1;},
+        }).addEntry({
+            fillColor: 'rgba(255, 255, 0, 0.5)',
+            progressListener: function() {return p2;},
+        }).addEntry({
+            fillColor: 'rgba(0, 0, 255, 0.5)',
+            progressListener: function() {return p3;},
+        });
         </pre>
 
 
+        <p>
+        If you want to stop the animation, call the `stop` method.
+        </p>
+        <pre class="prettyprint">
+        circle.stop();
+        </pre>
 
-        <!--<h2>Optional Parameters</h2>-->
+        <h2>Optional Parameters</h2>
 
-        <!--<pre class="prettyprint">-->
-        <!--var circle = new ProgressCircle({-->
-            <!--canvas: myCanvas,-->
-        <!--});-->
-        <!--</pre>-->
+        <pre class="prettyprint">
+        var circle = new ProgressCircle({
+            canvas: myCanvas, 
+            minRadius: 10, // Inner radius of the innermost circle
+            arcWidth: 3, // Width of each circle
+            gapWidth: 2, // Space between adjacent circles
+            centerX: 20, // X coordinate of the circle center
+            centerY: 20, // Y coordinate of the circle center
+            infoLineLength: 200, // Length of the info line
+            horizLineLength: 50, // Length of the horizontal info line
+            infoLineBaseAngle: Math.PI / 6, // Start angle of the info line
+            infoLineAngleInterval: Math.PI / 8, // Angle between info lines
+        });
+
+        circle.addEntry({
+            fillColor: 'rgba(255, 255, 0, 0.5)',
+            outlineColor: 'rgba(255, 255, 255, 0.5)' // (Optional)
+            progressListener: function() {return p1;},
+            infoListener: function() {return text1;},// (Optional)
+        });
+        </pre>
     </div>
 
     <script type="text/javascript" src="./test.js"></script>

@@ -18,7 +18,7 @@ h2 {
 }
 
 p {
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
 .ProgressCircleInfo {
@@ -41,6 +41,7 @@ p {
 }
 
 #wrapper {
+    width: 760px;
     margin-left: 50px;
     position: absolute;
     top: 350px;
