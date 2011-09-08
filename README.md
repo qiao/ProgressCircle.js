@@ -36,9 +36,9 @@ circle.addEntry({
     progressListener: function() {
         return THE_PROGRESS_VARIABLE_TO_LISTEN;
     },
-}).start(33); // 33 is the interval(ms) between each update
+});
 ```
-        
+
 You can add multiple progress indicators:
 
 ```javascript
@@ -53,7 +53,13 @@ circle.addEntry({
     progressListener: function() {return p3;},
 });
 ```
-    
+
+The call `start` to start the animation.
+
+```javascript
+circle.start(33); // 33 is the interval(ms) between each update
+```
+
 If you want to stop the animation, call the `stop` method.
 
 ```javascript
