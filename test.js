@@ -5,8 +5,8 @@ window.onload = function() {
     container.style.marginTop = '0px';
     var canvas = document.createElement('canvas');
     canvas.style.backgroundColor = '#333'; 
-    //canvas.style.marginTop = "200px";
-    //canvas.style.marginLeft = "20px";
+    canvas.style.marginTop = "200px";
+    canvas.style.marginLeft = "20px";
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     container.appendChild(canvas);
