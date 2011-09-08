@@ -7,10 +7,20 @@ homepage: http://qiao.github.com/ProgressCircle.js/
 
 ## Usage ##
 
+Download the file and include it in your page.
+
+```html
+<script type="text/javascript" src="ProgressCircle.js"></script>
+```
+
 You should first create the canvas element in either HTML or Javascript, 
 and specify its width and height. 
 
 **Note**: you should NOT specify the size of the canvas by CSS styles.
+
+```html
+<canvas id="my_canvas" width="100" height="40"></canvas>
+```
 
 Then proceed with codes like the following ones.
 
