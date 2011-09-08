@@ -1,7 +1,6 @@
-(function (window, document, undefined) {
+(function(window, document, undefined) {
     /**
-     * @constructor Progress Circle class, which is the only class exposed
-     *              to the global namespace.
+     * @constructor Progress Circle class
      * @param params.canvas Canvas on which the circles will be drawn.
      * @param params.minRadius Inner radius of the innermost circle, in px.
      * @param params.arcWidth Width of each circle(to be more accurate, ring).
@@ -11,7 +10,7 @@
      * @param params.infoLineBaseAngle Base angle of the info line.
      * @param params.infoLineAngleInterval Angles between the info lines.
      */
-    var ProgressCircle = function (params) {
+    var ProgressCircle = function(params) {
         this.canvas = params.canvas;
         this.minRadius = params.minRadius || 75;
         this.arcWidth = params.arcWidth || 20;
@@ -27,6 +26,7 @@
         this.height = this.canvas.height;
 
         this.circles = [];
+        this.runningCount = 0;
     };
 
     ProgressCircle.prototype = {
@@ -40,7 +40,7 @@
          * @param params.infoListener Callback function to fetch the info.
          * @returns this 
          */
-        addEntry: function (params) {
+        addEntry: function(params) {
             this.circles.push(new Circle({
                 canvas: this.canvas,
                 context: this.context,
@@ -66,9 +66,9 @@
          * @param interval Interval between updates, in millisecond.
          * @returns this 
          */
-        start: function (interval) {
+        start: function(interval) {
             var self = this;
-            this.timer = setInterval(function () {
+            this.timer = setInterval(function() {
                 self._update(); 
             }, interval || 33)
 
@@ -78,7 +78,7 @@
         /**
          * @method Stop the animation.
          */
-        stop: function () {
+        stop: function() {
             clearTimeout(this.timer);  
         },
 
@@ -87,9 +87,9 @@
          * @method Call update on each circle and redraw them.
          * @returns this
          */ 
-        _update: function () {
+        _update: function() {
             this._clear();
-            this.circles.forEach(function (circle, idx, array) {
+            this.circles.forEach(function(circle, idx, array) {
                 circle.update();
             });    
 
@@ -101,7 +101,7 @@
          * @method Clear the canvas.
          * @returns this
          */
-        _clear: function () {
+        _clear: function() {
             this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
             return this;
@@ -125,7 +125,7 @@
      * @param params.infoListener Callback function to fetch the info.
      * @param params.infoLineAngle Angle of info line.
      */
-    var Circle = function (params) {
+    var Circle = function(params) {
         this.canvas = params.canvas;
         this.context = params.context;
         this.centerX = params.centerX;
@@ -183,7 +183,7 @@
     Circle.prototype = {
         constructor: Circle,
 
-        update: function () {
+        update: function() {
             this.progress = this.progressListener();
             this._draw();
 
@@ -198,7 +198,7 @@
          * @method Draw the circle on the canvas.
          * @returns this
          */
-        _draw: function () {
+        _draw: function() {
             var ctx = this.context,
 
                 ANGLE_OFFSET = -Math.PI / 2,
@@ -230,7 +230,7 @@
          * @method Draw the info lines and info text.
          * @returns this
          */
-        _drawInfo: function () {
+        _drawInfo: function() {
 
             var pointList, lineHeight;
 
@@ -256,7 +256,7 @@
          * @param pointList An array of points in the form of [x, y].
          * @param close Whether to connect the first and last point.
          */
-        _drawSegments: function (pointList, close) {
+        _drawSegments: function(pointList, close) {
             var ctx = this.context;
 
             ctx.beginPath();
@@ -271,7 +271,7 @@
             ctx.stroke();
         },
     };
-    
+
     window.ProgressCircle = ProgressCircle;
 
 })(window, document);
