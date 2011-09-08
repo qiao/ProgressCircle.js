@@ -4,7 +4,6 @@ body {
     color: #ddd;
 }
 
-
 header {
     position: absolute;
     left: 50px;
@@ -33,6 +32,9 @@ p {
     margin-top: 2px;
 }
 
+.ProgressCircleInfo {
+    font-size: 12px;
+}
 
 #main_canvas {
     position: absolute;
@@ -47,16 +49,24 @@ p {
     top: 350px;
 }
 
-
-
-.ProgressCircleInfo {
-    font-size: 12px;
+#intro {
+    margin-bottom: 40px;
 }
 
-.round {
-    border-radius: 10px;
+
+.content {
+    padding-top: 5px;
+    margin-bottom: 50px;
 }
 
-.shadow {
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+#download a {
+    padding: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #ddd;
+    margin-right: 50px;
+}
+
+#download a:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
