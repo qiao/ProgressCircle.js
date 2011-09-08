@@ -1,4 +1,5 @@
 window.onload = function() {
+
     var mainCanvas = document.getElementById('main_canvas');
 
     var p1 = p2 = p3 = 0;
@@ -10,8 +11,10 @@ window.onload = function() {
         minRadius: 30,
         arcWidth: 7,
         gapWidth: 2,
+        infoLineLength: 80,
+        horizLineLength: 10,
         infoLineBaseAngle: Math.PI / 4,
-        infoLineAngleInterval: Math.PI / 20,
+        infoLineAngleInterval: Math.PI / 10,
     });
 
 

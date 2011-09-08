@@ -1,3 +1,7 @@
 html {
     background: url(bg.png);
 }
+
+#main_canvas {
+    background-color: #333;
+}
