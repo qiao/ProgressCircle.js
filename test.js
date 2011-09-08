@@ -1,6 +1,5 @@
 (function() {
     var mainCanvas = document.getElementById('main_canvas');
-
     var p1 = p2 = p3 = 0;
 
     var circle = new ProgressCircle({
