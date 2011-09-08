@@ -34,14 +34,15 @@
             or Javascript, <br>
             and specify its width and height. <br>
         </p>
-        <p>
-            <b>Note</b>: you should NOT specify the size of the canvas
-            by CSS styles.<br>
-        </p>
 
         <pre class="prettyprint">
         &lt;canvas id="my_canvas" width="100" height="40"&gt;&lt;/canvas&gt;
         </pre>
+
+        <p>
+            <b>Note</b>: you should NOT specify the size of the canvas
+            by CSS styles.<br>
+        </p>
 
         <p>
             Then proceed with codes like the following ones.
@@ -56,9 +57,9 @@
         circle.addEntry({
             fillColor: 'rgba(255, 255, 0, 0.5)',
             progressListener: function() {
-                return THE_PROGRESS_VARIABLE_TO_LISTEN;
+                return THE_PROGRESS_VARIABLE_TO_LISTEN; // between 0 and 1
             },
-        }).start(33); // 33 is the interval(ms) between each update
+        });
         </pre>
 
         <p>
@@ -77,6 +78,13 @@
         });
         </pre>
 
+        <p>
+        Then call `start` to start the animation.
+        </p>
+        
+        <pre class="prettyprint">
+        circle.start(33); // 33 is the interval(ms) between each update
+        </pre>
 
         <p>
         If you want to stop the animation, call the `stop` method.
