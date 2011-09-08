@@ -16,7 +16,19 @@
     <div id="content">
         
     <div id="wrapper">
+        <h1>A progress indicator in HTML5 canvas</h1>
         <h2>Usage</h2>
+
+        <p>
+            You should first create the canvas element either in HTML
+            or by Javascript, <br>
+            and specify its width and height. <br>
+            <b>Note</b>: you should not specify the size of the canvas
+            by CSS styles.<br>
+        </p>
+        <p>
+            Then proceed with codes like the following ones.
+        </p>
         <pre class="prettyprint">
         var myCanvas = document.getElementById('my_canvas');
 
@@ -31,12 +43,21 @@
             },
             infoListener: function() {
                 return THE_INFO_TEXT_TO_DISPLAY;
-            },
-        });
-                 
-        </pre>
-    </div>
+            }, // (Optional)
+        }).start(33); // 33 is the interval(ms) between each update
 
+        </pre>
+
+
+
+        <!--<h2>Optional Parameters</h2>-->
+
+        <!--<pre class="prettyprint">-->
+        <!--var circle = new ProgressCircle({-->
+            <!--canvas: myCanvas,-->
+        <!--});-->
+        <!--</pre>-->
+    </div>
 
     <script type="text/javascript" src="./test.js"></script>
     <script type="text/javascript">
