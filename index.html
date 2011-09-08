@@ -3,25 +3,45 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ProgressCircle.js</title>
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./sunburst.css">
+    <script type="text/javascript" src="./prettify.js"></script>
     <script type="text/javascript" src="./ProgressCircle.js"></script>
 </head>
 <body>
     <header>
         <img src="./banner.png"> 
-        <!--<div id="title_1">Pr</div>-->
-        <!--<div id="title_2">gress</div>-->
-        <!--<div id="title_3">Circle.js</div>-->
     </header>
     <canvas id="main_canvas" width="500" height="200"></canvas>
     <div id="content">
         
     <div id="wrapper">
         <h2>Usage</h2>
+        <pre class="prettyprint">
+        var myCanvas = document.getElementById('my_canvas');
+
+        var circle = new ProgressCircle({
+            canvas: myCanvas,
+        });
+
+        circle.addEntry({
+            fillColor: 'rgba(255, 255, 0, 0.5)',
+            progressListener: function() {
+                return THE_PROGRESS_VARIABLE_TO_LISTEN;
+            },
+            infoListener: function() {
+                return THE_INFO_TEXT_TO_DISPLAY;
+            },
+        });
+                 
+        </pre>
     </div>
 
 
     <script type="text/javascript" src="./test.js"></script>
+    <script type="text/javascript">
+        prettyPrint();
+    </script>
 
     <a href="https://github.com/qiao/ProgressCircle.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
     
