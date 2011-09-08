@@ -32,16 +32,14 @@
         <p>
             You should first create the canvas element in either HTML
             or Javascript, <br>
-            and specify its width and height. <br>
+            and specify its width and height.
         </p>
 
         <pre class="prettyprint">
-        &lt;canvas id="my_canvas" width="100" height="40"&gt;&lt;/canvas&gt;
-        </pre>
+        &lt;canvas id="my_canvas" width="100" height="40"&gt;&lt;/canvas&gt; </pre>
 
         <p>
-            <b>Note</b>: you should NOT specify the size of the canvas
-            by CSS styles.<br>
+            <b>Note</b>: you should NOT specify the size of the canvas in CSS.
         </p>
 
         <p>
@@ -59,8 +57,7 @@
             progressListener: function() {
                 return THE_PROGRESS_VARIABLE_TO_LISTEN; // between 0 and 1
             },
-        });
-        </pre>
+        }); </pre>
 
         <p>
         You can add multiple progress indicators:
@@ -75,23 +72,20 @@
         }).addEntry({
             fillColor: 'rgba(0, 0, 255, 0.5)',
             progressListener: function() {return p3;},
-        });
-        </pre>
+        }); </pre>
 
         <p>
         Then call `start` to start the animation.
         </p>
         
         <pre class="prettyprint">
-        circle.start(33); // 33 is the interval(ms) between each update
-        </pre>
+        circle.start(33); // 33 is the interval(ms) between each update </pre>
 
         <p>
         If you want to stop the animation, call the `stop` method.
         </p>
         <pre class="prettyprint">
-        circle.stop();
-        </pre>
+        circle.stop(); </pre>
         </div>
 
         <h2>Optional Parameters</h2>
@@ -116,8 +110,7 @@
             outlineColor: 'rgba(255, 255, 255, 0.5)' // (Optional)
             progressListener: function() {return p1;},
             infoListener: function() {return text1;},// (Optional)
-        });
-        </pre>
+        }); </pre>
         </div>
     </div>
 
