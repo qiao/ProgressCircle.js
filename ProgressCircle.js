@@ -54,6 +54,7 @@
                 infoLineLength: this.infoLineLength,
                 horizLineLength: this.horizLineLength,
 
+                id: this.circles.length,
                 fillColor: params.fillColor,
                 outlineColor: params.outlineColor,
                 progressListener: params.progressListener,
@@ -130,6 +131,7 @@
      * @param params.infoLineAngle Angle of info line.
      */
     var Circle = function(params) {
+        this.id = params.id;
         this.canvas = params.canvas;
         this.context = params.context;
         this.centerX = params.centerX;
@@ -177,7 +179,8 @@
         // user may want to change the size of the font, so the top offset 
         // must be updated in each loop.
         style.paddingLeft = '20px';
-        style.className = 'ProgressCircleInfo'; // For css styling
+        infoText.className = 'ProgressCircleInfo'; // For css styling
+        infoText.id = 'progress_cricle_' + this.id;
         document.body.appendChild(infoText);
         this.infoText = infoText;
     };
