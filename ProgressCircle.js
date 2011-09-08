@@ -193,7 +193,6 @@
         // style.top will be calculated in the `drawInfo` method. Since
         // user may want to change the size of the font, so the top offset 
         // must be updated in each loop.
-        style.paddingLeft = '20px';
         infoText.className = 'ProgressCircleInfo'; // For css styling
         infoText.id = 'progress_cricle_' + this.id;
         document.body.appendChild(infoText);
