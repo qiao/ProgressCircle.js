@@ -245,7 +245,7 @@
 
             lineHeight = this.infoText.offsetHeight;
             this.infoText.style.top = this.infoLineEndY + 
-                this.canvas.offsetLeft - lineHeight / 2 + 'px';
+                this.canvas.offsetTop - lineHeight / 2 + 'px';
 
             return this;
         }, 
