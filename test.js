@@ -1,19 +1,18 @@
-window.onload = function() {
-
+(function() {
     var mainCanvas = document.getElementById('main_canvas');
 
     var p1 = p2 = p3 = 0;
 
     var circle = new ProgressCircle({
         canvas: mainCanvas,
-        centerX: 100,
+        centerX: 120,
         centerY: 100,
-        minRadius: 30,
+        minRadius: 15,
         arcWidth: 7,
-        gapWidth: 2,
-        infoLineLength: 80,
-        horizLineLength: 10,
-        infoLineBaseAngle: Math.PI / 4,
+        gapWidth: 3,
+        infoLineLength: 100,
+        horizLineLength: 50,
+        infoLineBaseAngle: Math.PI / 10,
         infoLineAngleInterval: Math.PI / 10,
     });
 
@@ -42,9 +41,9 @@ window.onload = function() {
     }).start(33);
 
     setInterval(function() {
-        p1 = p1 < 1 ? p1 + 0.001 : 0;
-        p2 = p2 < 1 ? p2 + 0.002 : 0;
-        p3 = p3 < 1 ? p3 + 0.0025 : 0;
+        p1 = p1 < 1 ? p1 + 0.0025 : 0;
+        p2 = p2 < 1 ? p2 + 0.0015 : 0;
+        p3 = p3 < 1 ? p3 + 0.002 : 0;
     }, 20);
     
-};
+})();

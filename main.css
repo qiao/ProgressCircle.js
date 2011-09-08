@@ -1,16 +1,53 @@
-html {
-    background: url(bg.png);
+body {
+    background: #333;
+    padding: 0px;
+    color: #ddd;
 }
 
-#container {
+header {
     position: absolute;
-    left: 50%;
+    left: 50px;
+    top: 50px;
+    font-family: Candal;
+    font-size: 150px;
+    margin-bottom: 0;
 }
+
+#title_1, #title_2 {
+    display: inline;
+}
+
+#title_2 {
+    padding-left: 70px;
+}
+
+#title_3 {
+    font-size: 96px;
+    margin-top: -30px;
+    padding-left: 420px;
+}
+
 
 #main_canvas {
-    background-color: #333;
+    position: absolute;
+    left: 175px;
+    top: 75px;
 }
+
+#wrapper {
+    margin-left: 50px;
+}
+
+
 
 .ProgressCircleInfo {
     font-size: 12px;
+}
+
+.round {
+    border-radius: 10px;
+}
+
+.shadow {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
 }
