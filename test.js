@@ -1,37 +1,15 @@
 window.onload = function() {
-
-    var container = document.getElementById('container');
-    container.style.marginTop = '0px';
-    var canvas = document.createElement('canvas');
-    canvas.style.backgroundColor = '#333'; 
-    canvas.style.marginTop = "200px";
-    canvas.style.marginLeft = "20px";
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    container.appendChild(canvas);
-
-    var circle = new ProgressCircle({
-        canvas: canvas,
-        centerX: 200,
-        centerY: 200,
-        minRadius: 5,
-        arcWidth: 3,
-    });
+    var mainCanvas = document.getElementById('main_canvas');
 
     var p1 = p2 = p3 = 0;
 
-    /*
-    circle.addEntry({
-        fillColor: '#ff0',
-        progressListener: function() {return p3;},
-    }).start();
-    */
-
-
     var circle = new ProgressCircle({
-        canvas: canvas,
-        centerX: 200,
-        centerY: 200,
+        canvas: mainCanvas,
+        centerX: 100,
+        centerY: 100,
+        minRadius: 30,
+        arcWidth: 7,
+        gapWidth: 2,
         infoLineBaseAngle: Math.PI / 4,
         infoLineAngleInterval: Math.PI / 20,
     });
