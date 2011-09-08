@@ -17,6 +17,8 @@
         this.gapWidth = params.gapWidth || 5;
         this.centerX = params.centerX || this.canvas.width / 2;
         this.centerY = params.centerY || this.canvas.height / 2;
+        this.infoLineLength = params.infoLineLength || 250;
+        this.horizLineLength = params.horizLineLength || 50;
         this.infoLineAngleInterval = params.infoLineAngleInterval || Math.PI / 8;
         this.infoLineBaseAngle = params.infoLineBaseAngle || Math.PI / 6;
 
@@ -49,6 +51,8 @@
                 innerRadius: this.minRadius + this.circles.length * 
                     (this.gapWidth + this.arcWidth),
                 arcWidth: this.arcWidth,
+                infoLineLength: this.infoLineLength,
+                horizLineLength: this.horizLineLength,
 
                 fillColor: params.fillColor,
                 outlineColor: params.outlineColor,
@@ -135,6 +139,8 @@
         this.fillColor = params.fillColor || '#fff';
         this.outlineColor = params.outlineColor || this.fillColor;
         this.progressListener = params.progressListener;
+        this.infoLineLength = params.infoLineLength || 250;
+        this.horizLineLength = params.horizLineLength || 50;
         this.infoListener = params.infoListener;
         this.infoLineAngle = params.infoLineAngle;
 
@@ -149,20 +155,16 @@
             arcDistance = (this.innerRadius + this.outerRadius) / 2,
 
             sinA = Math.sin(angle),
-            cosA = Math.cos(angle),
-
-            MID_LINE_LENGTH = 250,
-            HORIZONTAL_LENGTH = 50;
-            
+            cosA = Math.cos(angle);
 
         this.infoLineStartX = this.centerX + sinA * arcDistance;
         this.infoLineStartY = this.centerY - cosA * arcDistance;
        
-        this.infoLineMidX = this.centerX + sinA * MID_LINE_LENGTH;
-        this.infoLineMidY = this.centerY - cosA * MID_LINE_LENGTH;
+        this.infoLineMidX = this.centerX + sinA * this.infoLineLength;
+        this.infoLineMidY = this.centerY - cosA * this.infoLineLength;
 
         this.infoLineEndX = this.infoLineMidX + 
-             (sinA < 0 ? -HORIZONTAL_LENGTH : HORIZONTAL_LENGTH);
+             (sinA < 0 ? -this.horizLineLength : this.horizLineLength);
         this.infoLineEndY = this.infoLineMidY;
 
         var infoText = document.createElement('div'),
