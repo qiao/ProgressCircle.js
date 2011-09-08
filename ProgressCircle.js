@@ -27,13 +27,13 @@
      */
     var ProgressCircle = function(params) {
         this.canvas = params.canvas;
-        this.minRadius = params.minRadius || 75;
-        this.arcWidth = params.arcWidth || 20;
-        this.gapWidth = params.gapWidth || 5;
+        this.minRadius = params.minRadius || 15;
+        this.arcWidth = params.arcWidth || 5;
+        this.gapWidth = params.gapWidth || 3;
         this.centerX = params.centerX || this.canvas.width / 2;
         this.centerY = params.centerY || this.canvas.height / 2;
-        this.infoLineLength = params.infoLineLength || 250;
-        this.horizLineLength = params.horizLineLength || 50;
+        this.infoLineLength = params.infoLineLength || 60;
+        this.horizLineLength = params.horizLineLength || 10;
         this.infoLineAngleInterval = params.infoLineAngleInterval || Math.PI / 8;
         this.infoLineBaseAngle = params.infoLineBaseAngle || Math.PI / 6;
 
