@@ -8,7 +8,7 @@ header {
     position: absolute;
     left: 50px;
     top: 50px;
-    font-family: Candal;
+    font-family: 'Candal';
     font-size: 150px;
     margin-bottom: 0;
 }
@@ -22,13 +22,21 @@ header {
 }
 
 #title_3 {
-    font-size: 96px;
+    font-size: 72px;
     margin-top: -30px;
     padding-left: 420px;
 }
 
-#progress_circle_info0 {
-    padding-bottom: 2px;
+.ProgressCircleInfo {
+    padding-left: 15px;
+}
+
+#progress_circle_info_0 {
+    padding-bottom: 8px;
+}
+
+#progress_circle_info_1 {
+    margin-top: 2px;
 }
 
 
