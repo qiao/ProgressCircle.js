@@ -27,6 +27,10 @@ header {
     padding-left: 420px;
 }
 
+#progress_circle_info0 {
+    padding-bottom: 2px;
+}
+
 
 #main_canvas {
     position: absolute;
