@@ -16,7 +16,7 @@ Download the file and include it in your page.
 You should first create the canvas element in either HTML or Javascript, 
 and specify its width and height. 
 
-**Note**: you should NOT specify the size of the canvas by CSS styles.
+**Note**: you should NOT specify the size of the canvas in CSS.
 
 ```html
 <canvas id="my_canvas" width="100" height="40"></canvas>
