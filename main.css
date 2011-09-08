@@ -4,27 +4,16 @@ body {
     color: #ddd;
 }
 
+
 header {
     position: absolute;
     left: 50px;
     top: 50px;
-    font-family: 'Candal';
     font-size: 150px;
     margin-bottom: 0;
 }
 
-#title_1, #title_2 {
-    display: inline;
-}
-
-#title_2 {
-    padding-left: 70px;
-}
-
-#title_3 {
-    font-size: 72px;
-    margin-top: -30px;
-    padding-left: 420px;
+h2 {
 }
 
 .ProgressCircleInfo {
@@ -42,12 +31,14 @@ header {
 
 #main_canvas {
     position: absolute;
-    left: 175px;
-    top: 75px;
+    left: 180px;
+    top: 60px;
 }
 
 #wrapper {
     margin-left: 50px;
+    position: absolute;
+    top: 350px;
 }
 
 
