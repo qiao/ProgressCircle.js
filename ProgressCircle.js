@@ -194,7 +194,7 @@
         // user may want to change the size of the font, so the top offset 
         // must be updated in each loop.
         infoText.className = 'ProgressCircleInfo'; // For css styling
-        infoText.id = 'progress_cricle_info' + this.id;
+        infoText.id = 'progress_circle_info_' + this.id;
         document.body.appendChild(infoText);
         this.infoText = infoText;
     };
