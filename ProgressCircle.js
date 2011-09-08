@@ -1,4 +1,19 @@
 (function(window, document, undefined) {
+
+    /**
+     * Find the absolute position of an element
+     */
+    var absPos = function(element) {
+        var offsetLeft = offsetTop = 0;
+        if (element.offsetParent) {
+            do {
+                offsetLeft += element.offsetLeft;
+                offsetTop += element.offsetTop;
+            } while (element = element.offsetParent);
+        }
+        return [offsetLeft, offsetTop];
+    };
+
     /**
      * @constructor Progress Circle class
      * @param params.canvas Canvas on which the circles will be drawn.
@@ -174,7 +189,7 @@
 
         style.color = this.fillColor;
         style.position = 'absolute';
-        style.left = this.infoLineEndX + this.canvas.offsetLeft + 'px';
+        style.left = this.infoLineEndX + absPos(this.canvas)[0] + 'px';
         // style.top will be calculated in the `drawInfo` method. Since
         // user may want to change the size of the font, so the top offset 
         // must be updated in each loop.
@@ -250,7 +265,7 @@
 
             lineHeight = this.infoText.offsetHeight;
             this.infoText.style.top = this.infoLineEndY + 
-                this.canvas.offsetTop - lineHeight / 2 + 'px';
+                absPos(this.canvas)[1] - lineHeight / 2 + 'px';
 
             return this;
         }, 
