@@ -16,11 +16,11 @@ Download the file and include it in your page.
 You should first create the canvas element in either HTML or Javascript, 
 and specify its width and height. 
 
-**Note**: you should NOT specify the size of the canvas in CSS.
-
 ```html
 <canvas id="my_canvas" width="100" height="40"></canvas>
 ```
+
+**Note**: you should NOT specify the size of the canvas in CSS.
 
 Then proceed with codes like the following ones.
 
@@ -34,7 +34,7 @@ var circle = new ProgressCircle({
 circle.addEntry({
     fillColor: 'rgba(255, 255, 0, 0.5)',
     progressListener: function() {
-        return THE_PROGRESS_VARIABLE_TO_LISTEN;
+        return THE_PROGRESS_VARIABLE_TO_LISTEN; // between 0 and 1
     },
 });
 ```
