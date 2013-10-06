@@ -4,7 +4,8 @@
      * Find the absolute position of an element
      */
     var absPos = function(element) {
-        var offsetLeft = offsetTop = 0;
+        var offsetLeft, offsetTop;
+        offsetLeft = offsetTop = 0;
         if (element.offsetParent) {
             do {
                 offsetLeft += element.offsetLeft;
@@ -55,7 +56,7 @@
          * @param params.outlineColor Color to outline the circle.
          * @param params.progressListener Callback function to fetch the progress.
          * @param params.infoListener Callback function to fetch the info.
-         * @returns this 
+         * @returns this
          */
         addEntry: function(params) {
             this.circles.push(new Circle({
@@ -63,7 +64,7 @@
                 context: this.context,
                 centerX: this.centerX,
                 centerY: this.centerY,
-                innerRadius: this.minRadius + this.circles.length * 
+                innerRadius: this.minRadius + this.circles.length *
                     (this.gapWidth + this.arcWidth),
                 arcWidth: this.arcWidth,
                 infoLineLength: this.infoLineLength,
@@ -74,7 +75,7 @@
                 outlineColor: params.outlineColor,
                 progressListener: params.progressListener,
                 infoListener: params.infoListener,
-                infoLineAngle: this.infoLineBaseAngle + 
+                infoLineAngle: this.infoLineBaseAngle +
                     this.circles.length * this.infoLineAngleInterval,
             }));
 
@@ -84,13 +85,13 @@
         /**
          * @method Starts the monitor and updates with the given interval.
          * @param interval Interval between updates, in millisecond.
-         * @returns this 
+         * @returns this
          */
         start: function(interval) {
             var self = this;
             this.timer = setInterval(function() {
-                self._update(); 
-            }, interval || 33)
+                self._update();
+            }, interval || 33);
 
             return this;
         },
@@ -99,19 +100,19 @@
          * @method Stop the animation.
          */
         stop: function() {
-            clearTimeout(this.timer);  
+            clearTimeout(this.timer);
         },
 
         /**
          * @private
          * @method Call update on each circle and redraw them.
          * @returns this
-         */ 
+         */
         _update: function() {
             this._clear();
             this.circles.forEach(function(circle, idx, array) {
                 circle.update();
-            });    
+            });
 
             return this;
         },
@@ -131,7 +132,7 @@
 
     /**
      * @private
-     * @class Individual progress circle. 
+     * @class Individual progress circle.
      * @param params.canvas Canvas on which the circle will be drawn.
      * @param params.context Context of the canvas.
      * @param params.innerRadius Inner radius of the circle, in px.
@@ -163,7 +164,7 @@
 
         this.outerRadius = this.innerRadius + this.arcWidth;
 
-        // If the info listener is not registered, then don't calculate 
+        // If the info listener is not registered, then don't calculate
         // the related coordinates
         if (!this.infoListener) return;
 
@@ -176,11 +177,11 @@
 
         this.infoLineStartX = this.centerX + sinA * arcDistance;
         this.infoLineStartY = this.centerY - cosA * arcDistance;
-       
+
         this.infoLineMidX = this.centerX + sinA * this.infoLineLength;
         this.infoLineMidY = this.centerY - cosA * this.infoLineLength;
 
-        this.infoLineEndX = this.infoLineMidX + 
+        this.infoLineEndX = this.infoLineMidX +
              (sinA < 0 ? -this.horizLineLength : this.horizLineLength);
         this.infoLineEndY = this.infoLineMidY;
 
@@ -191,7 +192,7 @@
         style.position = 'absolute';
         style.left = this.infoLineEndX + absPos(this.canvas)[0] + 'px';
         // style.top will be calculated in the `drawInfo` method. Since
-        // user may want to change the size of the font, so the top offset 
+        // user may want to change the size of the font, so the top offset
         // must be updated in each loop.
         infoText.className = 'ProgressCircleInfo'; // For css styling
         infoText.id = 'progress_circle_info_' + this.id;
@@ -263,11 +264,11 @@
             this.infoText.innerHTML = this.info;
 
             lineHeight = this.infoText.offsetHeight;
-            this.infoText.style.top = this.infoLineEndY + 
+            this.infoText.style.top = this.infoLineEndY +
                 absPos(this.canvas)[1] - lineHeight / 2 + 'px';
 
             return this;
-        }, 
+        },
 
         /**
          * @private
@@ -279,7 +280,7 @@
             var ctx = this.context;
 
             ctx.beginPath();
-            ctx.moveTo(pointList[0][0], pointList[0][1])
+            ctx.moveTo(pointList[0][0], pointList[0][1]);
             for (var i = 1; i < pointList.length; ++i) {
                 ctx.lineTo(pointList[i][0], pointList[i][1]);
             }
