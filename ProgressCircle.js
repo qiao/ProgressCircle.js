@@ -10,7 +10,7 @@
             do {
                 offsetLeft += element.offsetLeft;
                 offsetTop += element.offsetTop;
-            } while (element == element.offsetParent);
+            } while (element = element.offsetParent);
         }
         return [offsetLeft, offsetTop];
     };
