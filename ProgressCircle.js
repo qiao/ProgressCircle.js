@@ -95,6 +95,10 @@
 
             return this;
         },
+        
+        update: function ( value ) {
+            this._update( value );
+        },
 
         /**
          * @method Stop the animation.
@@ -108,10 +112,10 @@
          * @method Call update on each circle and redraw them.
          * @returns this
          */
-        _update: function() {
+        _update: function( value ) {
             this._clear();
             this.circles.forEach(function(circle, idx, array) {
-                circle.update();
+                circle.update( value );
             });
 
             return this;
@@ -203,8 +207,8 @@
     Circle.prototype = {
         constructor: Circle,
 
-        update: function() {
-            this.progress = this.progressListener();
+        update: function( value ) {
+            this.progress = value || this.progressListener();
             this._draw();
 
             if (this.infoListener) {
