@@ -96,8 +96,11 @@
             return this;
         },
         
-        update: function ( value ) {
-            this._update( value );
+        /**
+         * @method Manually update all circles
+         */
+        update: function(value) {
+            this._update(value);
         },
 
         /**
@@ -110,12 +113,13 @@
         /**
          * @private
          * @method Call update on each circle and redraw them.
+         * @param value Value to be passed to circle update method (in case of manual update)
          * @returns this
          */
-        _update: function( value ) {
+        _update: function(value) {
             this._clear();
             this.circles.forEach(function(circle, idx, array) {
-                circle.update( value );
+                circle.update(value);
             });
 
             return this;
@@ -207,7 +211,7 @@
     Circle.prototype = {
         constructor: Circle,
 
-        update: function( value ) {
+        update: function(value) {
             this.progress = value || this.progressListener();
             this._draw();
 
